@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
-// import testRouter from "./routes/test.routes.js";
-// import authRouter from "./routes/auth.routes.js";
+import testRouter from "./routes/test.routes.js";
+import authRouter from "./routes/auth.routes.js";
 import HttpStatus from 'http-status-codes'
 import buildError from "./utils/build-errors.js";
 import { NextFunction } from "express"
@@ -9,9 +9,9 @@ const PORT = 3000;
 const app = express();
 app.use(express.json());
 
-// app.use("/api", [testRouter, authRouter]);
+app.use("/api", [testRouter, authRouter]);
 
-app.use(function METHOD_NOT_ALLOWED(req, res) {
+app.use(function METHOD_NOT_ALLOWED(req:Request, res:Response) {
   res.status(HttpStatus.METHOD_NOT_ALLOWED).json({
     error: {
       code: HttpStatus.METHOD_NOT_ALLOWED,
